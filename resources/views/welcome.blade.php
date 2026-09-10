@@ -419,6 +419,7 @@
                         
                         <div class="prose prose-invert prose-lg prose-p:text-gray-300 prose-p:leading-relaxed max-w-none font-light relative z-10">
                             {!! nl2br(e(str_ireplace('karting', 'fórmula 3', $biography->content))) !!}
+                            Rumbo a la formula 1
                         </div>
                         
                         <!-- Footer de Biografía decorativo -->
@@ -764,7 +765,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                             @csrf
                             <div class="relative flex-grow">
                                 <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyan-400 font-bold">$</span>
-                                <input type="number" name="amount" min="1880" placeholder="1880" required class="w-full bg-brand-dark border-2 border-cyan-500/30 text-white rounded-xl py-3 pl-10 pr-4 focus:border-cyan-400 focus:ring-0 outline-none transition-all font-sans">
+                                <input type="number" name="amount" min="188" placeholder="188" required class="w-full bg-brand-dark border-2 border-cyan-500/30 text-white rounded-xl py-3 pl-10 pr-4 focus:border-cyan-400 focus:ring-0 outline-none transition-all font-sans">
                             </div>
                             <button type="submit" class="inline-flex items-center justify-center bg-cyan-500/10 border-2 border-cyan-500 text-cyan-400 font-racing text-xl uppercase py-3 px-8 transition-all hover:bg-cyan-500 hover:text-black rounded-xl group-hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]">
                                 Aportar

@@ -76,7 +76,7 @@ class SubscriptionController extends Controller
 
     public function donate(Request $request)
     {
-        $request->validate(['amount' => 'required|numeric|min:1880']);
+        $request->validate(['amount' => 'required|numeric|min:188']);
         $amount = (float) $request->amount;
         $user = Auth::user();
 
@@ -130,7 +130,7 @@ class SubscriptionController extends Controller
 
     public function donateRecurring(Request $request)
     {
-        $request->validate(['amount' => 'required|numeric|min:1880']);
+        $request->validate(['amount' => 'required|numeric|min:2888']);
         $amount = (float) $request->amount;
         $user = Auth::user();
 
