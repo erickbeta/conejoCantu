@@ -425,7 +425,7 @@
                         <div class="mt-12 pt-8 border-t border-white/10 flex items-center justify-between">
                             <div class="flex items-center gap-3">
                                 <div class="w-2 h-2 rounded-full bg-brand-red animate-pulse"></div>
-                                <span class="text-brand-gray text-sm uppercase tracking-widest font-racing">Sangre de Campeón</span>
+                                <span class="text-brand-gray text-sm uppercase tracking-widest font-racing"></span>
                             </div>
                             <img src="{{ asset('images/logos/letrero-conejo.png') }}" alt="Firma" class="h-10 opacity-60 filter brightness-200">
                         </div>
@@ -736,7 +736,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                             </li>
                         </ul>
                         
-                        <a href="#" class="block text-center w-full bg-brand-red text-white font-racing text-xl uppercase py-3 transition-colors hover:bg-red-700 rounded-xl shadow-[0_0_15px_rgba(230,32,32,0.4)]">Unirse a Elite</a>
+                        <a href="{{ route('subscribe', ['plan' => 'elite']) }}" class="block text-center w-full bg-brand-red text-white font-racing text-xl uppercase py-3 transition-colors hover:bg-red-700 rounded-xl shadow-[0_0_15px_rgba(230,32,32,0.4)]">Unirse a Elite</a>
                     </div>
                 </div>
             </div>
