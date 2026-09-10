@@ -4,7 +4,7 @@
 
     <div class="text-center mb-8">
         <h2 class="text-3xl font-racing uppercase tracking-wider text-white">Iniciar Sesión</h2>
-        <p class="text-gray-400 text-sm mt-2">Ingresa a tu cuenta para ver contenido exclusivo</p>
+        <p class="text-gray-400 text-sm mt-2">Para unirte al Conejo Club o realizar tu aportación, necesitas iniciar sesión o crear una cuenta gratuita.</p>
     </div>
 
     <form method="POST" action="{{ route('login') }}">

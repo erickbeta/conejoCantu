@@ -751,7 +751,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                     
                     <div class="relative z-10 flex-grow mb-8">
                         <div class="flex items-center gap-3 mb-2">
-                            <h4 class="text-3xl font-racing uppercase text-cyan-400 tracking-wide">Club Apex</h4>
+                            <h4 class="text-3xl font-racing uppercase text-cyan-400 tracking-wide">Aportación Única</h4>
                         </div>
                         <div class="font-racing text-2xl text-white mb-4">Aportación Única</div>
                         <p class="text-gray-400 text-sm font-light leading-relaxed mb-2">
@@ -760,7 +760,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                     </div>
                     
                     <div class="w-full relative z-10">
-                        <form action="{{ route('donate') }}" method="POST" class="flex flex-col sm:flex-row gap-3">
+                        <form id="form-apex" action="{{ route('donate') }}" method="POST" class="flex flex-col sm:flex-row gap-3">
                             @csrf
                             <div class="relative flex-grow">
                                 <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyan-400 font-bold">$</span>
