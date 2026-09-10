@@ -419,13 +419,13 @@
                         
                         <div class="prose prose-invert prose-lg prose-p:text-gray-300 prose-p:leading-relaxed max-w-none font-light relative z-10">
                             {!! nl2br(e(str_ireplace('karting', 'fórmula 3', $biography->content))) !!}
-                            Rumbo a la formula 1
+                            
                         </div>
                         
                         <!-- Footer de Biografía decorativo -->
                         <div class="mt-12 pt-8 border-t border-white/10 flex items-center justify-between">
                             <div class="flex items-center gap-3">
-                                <div class="w-2 h-2 rounded-full bg-brand-red animate-pulse"></div>
+                                <div class="w-2 h-2 rounded-full bg-brand-red animate-pulse">Rumbo a la formula 1</div>
                                 <span class="text-brand-gray text-sm uppercase tracking-widest font-racing"></span>
                             </div>
                             <img src="{{ asset('images/logos/letrero-conejo.png') }}" alt="Firma" class="h-10 opacity-60 filter brightness-200">
