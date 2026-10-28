@@ -673,7 +673,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
 
 Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!')) !!}</p>
                         
-                        <div class="mb-4 font-bold text-gray-300 text-sm italic">Incluye todo Club Oro + :</div>
+                        
                         <ul class="space-y-4 mb-8 text-sm text-gray-300">
 
                         <li class="flex items-start gap-3">
@@ -737,7 +737,6 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
 
 Únete a Conejo Club. Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!')) !!}</p>
                         
-                        <div class="mb-4 font-bold text-brand-red text-sm italic">Incluye todo Club Oro y Club Titanio + :</div>
                         <ul class="space-y-4 mb-8 text-sm text-gray-300">
 
                             <li class="flex items-start gap-3">
