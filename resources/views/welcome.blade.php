@@ -96,6 +96,22 @@
             50% { box-shadow: 0 0 35px rgba(230,32,32,0.6); }
             100% { box-shadow: 0 0 15px rgba(230,32,32,0.3); }
         }
+
+        /* Destello diagonal para el banner ¡SÚMATE AQUÍ! */
+        @keyframes racing-shimmer {
+            0% { transform: translateX(-150%) skewX(-25deg); }
+            35%, 100% { transform: translateX(250%) skewX(-25deg); }
+        }
+        .animate-racing-shimmer {
+            animation: racing-shimmer 3.5s ease-in-out infinite;
+        }
+        @keyframes arrow-nudge {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+        .animate-arrow-nudge {
+            animation: arrow-nudge 1.2s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen bg-brand-black text-white antialiased selection:bg-brand-red selection:text-white">
@@ -154,9 +170,9 @@
         <div class="absolute inset-0 bg-gradient-to-br from-brand-red/10 via-brand-black to-brand-black z-0"></div>
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 z-0"></div>
         
-        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10 flex-grow">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10 flex-grow">
             <!-- Text Left -->
-            <div class="p-8 md:p-12 animate-fade-in-up text-left">
+            <div class="lg:col-span-5 p-6 md:p-8 animate-fade-in-up text-left">
                 <div class="inline-block px-4 py-1 border border-brand-red/50 text-brand-red font-racing text-xl mb-6 rounded-tl-lg rounded-br-lg" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
                     {{ $settings['hero_badge']->value ?? 'PILOTO DE FÓRMULA 3' }}
                 </div>
@@ -166,20 +182,50 @@
                 <p class="text-brand-gray text-xl md:text-2xl mb-10 font-light uppercase tracking-widest h-16 md:h-10">
                     <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
                 </p>
-                <div class="flex flex-col sm:flex-row gap-6 opacity-0 translate-y-4 pt-4" id="hero-buttons" style="transition: opacity 1s ease, transform 1s ease;">
-                    <a href="#suscripciones" class="group relative inline-flex items-center justify-center px-12 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto pulse-glow">
+                <div class="flex flex-col sm:flex-row gap-4 opacity-0 translate-y-4 pt-4" id="hero-buttons" style="transition: opacity 1s ease, transform 1s ease;">
+                    <a href="#suscripciones" class="group relative inline-flex items-center justify-center px-8 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto pulse-glow whitespace-nowrap">
                         <div class="absolute inset-0 bg-brand-red skew-x-[-12deg] rounded-sm transition-all duration-300 group-hover:bg-red-700"></div>
                         <span class="relative mt-1">{{ $settings['hero_button_1_text']->value ?? 'Apoyar al Piloto' }}</span>
                     </a>
-                    <a href="#biografia" class="group relative inline-flex items-center justify-center px-12 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto mt-2 sm:mt-0">
+                    <a href="#biografia" class="group relative inline-flex items-center justify-center px-8 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto mt-2 sm:mt-0 whitespace-nowrap">
                         <div class="absolute inset-0 bg-white/5 border border-white/20 skew-x-[-12deg] rounded-sm transition-all duration-300 group-hover:bg-white/10"></div>
                         <span class="relative mt-1">{{ $settings['hero_button_2_text']->value ?? 'Conocer Más' }}</span>
                     </a>
                 </div>
             </div>
+
+            <!-- Banner Central ¡SÚMATE AQUÍ! (Entre el letrero y la foto) -->
+            <div class="lg:col-span-2 flex justify-center items-center z-20 my-2 lg:my-0 lg:-mt-16">
+                <a href="#suscripciones" class="group relative flex flex-col items-center justify-center text-center bg-gradient-to-br from-brand-dark via-brand-black to-brand-red/90 border-2 border-brand-red px-6 py-6 w-full max-w-[230px] text-white shadow-[0_0_35px_rgba(230,32,32,0.45)] hover:shadow-[0_0_50px_rgba(230,32,32,0.85)] transition-all duration-300 hover:-translate-y-2 hover:scale-105 overflow-hidden pulse-glow floating" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);">
+                    <!-- Barrido de luz (Shimmer) -->
+                    <div class="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/25 to-transparent animate-racing-shimmer pointer-events-none"></div>
+
+                    <!-- Indicador luminoso superior -->
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-red opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-red"></span>
+                        </span>
+                        <span class="text-[11px] uppercase tracking-[0.2em] text-gray-300 font-bold"></span>
+                    </div>
+
+                    <span class="font-racing text-3xl sm:text-4xl uppercase tracking-wider text-white group-hover:text-yellow-400 transition-colors leading-none my-1">
+                        ¡SÚMATE AQUÍ!
+                    </span>
+
+                    <span class="text-xs text-gray-300 font-light mt-1 mb-3">Sé parte del equipo rumbo a F1</span>
+
+                    <div class="inline-flex items-center gap-1 bg-brand-red group-hover:bg-white group-hover:text-brand-black text-white font-racing uppercase tracking-widest text-base px-4 py-1 rounded transition-colors">
+                        <span>Ver Planes</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 animate-arrow-nudge" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </a>
+            </div>
             
             <!-- Image Placeholder Right -->
-            <div class="flex justify-center items-end h-[50vh] md:h-[60vh] lg:h-[80vh] relative animate-fade-in-up mt-8 lg:mt-0" style="animation-delay: 0.3s;">
+            <div class="lg:col-span-5 flex justify-center items-end h-[50vh] md:h-[60vh] lg:h-[80vh] relative animate-fade-in-up mt-8 lg:mt-0" style="animation-delay: 0.3s;">
                 <!-- Efecto de resplandor detrás del piloto -->
                 <div class="absolute inset-0 bg-brand-red/5 blur-[100px] rounded-full z-0"></div>
                 <div class="w-full h-full bg-gradient-to-t from-brand-black via-transparent to-transparent absolute bottom-0 left-0 z-20"></div>
@@ -187,7 +233,7 @@
                 <div class="text-white/5 font-racing text-[15rem] absolute -right-10 top-10 select-none z-0 leading-none">88</div>
                 
                 <!-- Caja de imagen con diseño fusión (bordes redondeados + corte) -->
-                <div class="w-3/4 h-5/6 border border-white/10 bg-brand-dark/30 backdrop-blur-sm rounded-2xl flex items-center justify-center relative z-10 overflow-hidden floating" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); box-shadow: inset 0 0 20px rgba(255,255,255,0.02);">
+                <div class="w-5/6 lg:w-11/12 h-5/6 border border-white/10 bg-brand-dark/30 backdrop-blur-sm rounded-2xl flex items-center justify-center relative z-10 overflow-hidden floating" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); box-shadow: inset 0 0 20px rgba(255,255,255,0.02);">
                     @if(isset($settings['hero_image']) && $settings['hero_image']->value)
                         <img src="{{ asset('storage/' . $settings['hero_image']->value) }}" alt="Cristian Cantú" class="w-full h-full object-cover animate-grayscale-loop">
                     @else
