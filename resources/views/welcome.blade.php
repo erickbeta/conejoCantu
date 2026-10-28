@@ -717,7 +717,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                             </li>
                             <li class="flex items-start gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
-                                Descuentos exclusivos en Conejo Merch 25% al 50% + 2x1 y 3x2
+                                Descuentos exclusivos en Conejo Merch del 2x1 y 3x2
                             </li>
                             <li class="flex items-start gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
