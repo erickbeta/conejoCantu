@@ -20,6 +20,7 @@ class User extends Authenticatable
         'email',
         'password',
         'birthdate',
+        'is_admin',
     ];
 
     /**
@@ -43,7 +44,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'birthdate' => 'date',
+            'is_admin' => 'boolean',
         ];
+    }
+
+    public function isAdmin(): bool
+    {
+        return (bool) $this->is_admin;
     }
 
     public function subscription()
@@ -53,6 +60,10 @@ class User extends Authenticatable
 
     public function hasActiveSubscription()
     {
+        if ($this->isAdmin()) {
+            return true;
+        }
+
         $sub = $this->subscription;
         return $sub && $sub->status === 'active';
     }

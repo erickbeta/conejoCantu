@@ -618,11 +618,11 @@
                 <!-- Club Oro -->
                 <div class="bg-brand-dark border border-yellow-500/50 flex flex-col shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(234,179,8,0.15)] rounded-2xl overflow-hidden relative group">
                     <div class="p-8 pb-0">
-                        <h4 class="text-2xl font-racing uppercase text-yellow-500 mb-1">Club Oro</h4>
-                        <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_oro_price']->value ?? 188) }}<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
+                        <h4 class="text-2xl font-racing uppercase text-yellow-500 mb-2">Club Oro</h4>
+                        <div class="font-racing text-5xl text-white">MXN {{ number_format($settings['club_oro_price']->value ?? 188) }}<span class="text-xl text-gray-600 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
-                    <div class="p-8 flex flex-col flex-grow">
-                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">{!! nl2br(e($settings['club_oro_desc']->value ?? 'Quiero que formes parte real de este camino y que te conviertas en parte del equipo.
+                    <div class="p-8 flex flex-col">
+                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light text-center">{!! nl2br(e($settings['club_oro_desc']->value ?? 'Quiero que formes parte real de este camino y que te conviertas en parte del equipo.
 
 Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.
 
@@ -631,24 +631,25 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                         <ul class="space-y-4 mb-8 text-sm text-gray-300">
                             <li class="flex items-start gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
-                                + Video de bienvenida
+                                Video de bienvenida
                             </li>
                             <li class="flex items-start gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
-                                + Credencial con # socio (PDF)
+                                # de Socio Conejo Club
+                            </li>
+                             <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                Credencial lista para que tu la imprimas
                             </li>
                             <li class="flex items-start gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
-                                + Diploma digital de miembro oficial
+                                Diploma digital de miembro oficial
                             </li>
                             <li class="flex items-start gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
-                                + Contenido exclusivo fotos, videos y noticias.
+                                Contenido como fotos, videos y noticias.
                             </li>
-                            <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
-                                + Mandarme mensajes directos
-                            </li>
+                         
                         </ul>
                         
                         <a href="{{ route('subscribe', ['plan' => 'oro']) }}" class="block text-center w-full bg-white/5 border border-yellow-500/50 text-yellow-500 font-racing text-xl uppercase py-3 transition-colors hover:bg-yellow-500 hover:text-black rounded-xl">Unirse a Oro</a>
@@ -665,7 +666,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                         <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_titanio_price']->value ?? 788) }}<span class="text-xl text-gray-500 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative z-10">
-                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">{!! nl2br(e($settings['club_titanio_desc']->value ?? 'Quiero que formes parte real de este camino y que te conviertas en parte del equipo.
+                        <p class="text-sm text-gray-400 mb-6  font-light text-center">{!! nl2br(e($settings['club_titanio_desc']->value ?? 'Quiero que formes parte real de este camino y que te conviertas en parte del equipo.
 
 Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto.
 
@@ -673,26 +674,49 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                         
                         <div class="mb-4 font-bold text-gray-300 text-sm italic">Incluye todo Club Oro + :</div>
                         <ul class="space-y-4 mb-8 text-sm text-gray-300">
+
+                        <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                Video de bienvenida
+                            </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
-                                + Descuentos exclusivos en Conejo Merch
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                # De Socio Conejo Club
+                            </li>
+                             <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                Credencial lista para que tu la imprimas
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                Diploma digital de miembro oficial
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                Contenido exclusivo de fotos, videos y noticias.
                             </li>
                             <li class="flex items-start gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
-                                + Invitación a evento exclusivo de socios (CDMX y Torreón)
+                                Un conejo kit al cumplir 1 año con envio gratis en México (Costo adicional envio a otros países).
+                            </li>
+                            
+                            <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
+                                Acceso a evento exclusivo Anual de Socios
                             </li>
                             <li class="flex items-start gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
-                                + ¡Video personalizado de cumpleaños!
+                                Descuentos exclusivos en Conejo Merch 25% al 50% + 2x1 y 3x2
                             </li>
                             <li class="flex items-start gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
-                                + Participación sorteo anual Conejo Merch firmada (entrega gratis en México)
+                                ¡Video personalizado de cumpleaños!
                             </li>
                             <li class="flex items-start gap-3">
                                 <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
-                                Un conejo kit de regalo al cumplir 1 año (entrega gratis en México).
+                                Participación sorteo anual Conejo Merch firmada (entrega gratis en México, otros países pagando envio)
                             </li>
+                            
                         </ul>
                         <a href="{{ route('subscribe', ['plan' => 'titanio']) }}" class="block text-center w-full bg-gray-300 text-brand-black font-racing text-xl uppercase py-3 transition-colors hover:bg-white rounded-xl shadow-[0_0_15px_rgba(156,163,175,0.4)]">Unirse a Titanio</a>
                     </div>
@@ -706,7 +730,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                         <div class="font-racing text-5xl text-white mb-2">MXN {{ number_format($settings['club_elite_price']->value ?? 1880) }}<span class="text-xl text-gray-500 font-sans normal-case ml-2">/ mes</span></div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative z-10">
-                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light">{!! nl2br(e($settings['club_elite_desc']->value ?? 'Quiero que formes parte real de este camino y que te conviertas en parte del equipo.
+                        <p class="text-sm text-gray-400 mb-6 flex-grow font-light text-center   ">{!! nl2br(e($settings['club_elite_desc']->value ?? 'Quiero que formes parte real de este camino y que te conviertas en parte del equipo.
 
 Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, serás parte de este gran proyecto. ¡TENDRÁS TU NOMBRE EN MI AUTO!
 
@@ -714,26 +738,75 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                         
                         <div class="mb-4 font-bold text-brand-red text-sm italic">Incluye todo Club Oro y Club Titanio + :</div>
                         <ul class="space-y-4 mb-8 text-sm text-gray-300">
+
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
-                                + ¡Tu nombre en mi auto!
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                Video de bienvenida
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
-                                + Vídeo de agradecimiento exclusivo
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                # De Socio Conejo Club
+                            </li>
+                             <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                Credencial lista para que tu la imprimas
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
-                                + Posibilidad de 1 videollamada conmigo
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                Diploma digital de miembro oficial
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
-                                + Un conejo kit VIP de regalo entrega gratis en México al cumplir 1 año 
+                                <div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0"></div>
+                                Contenido exclusivo de fotos, videos y noticias.
                             </li>
                             <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
-                                + Reconocimiento en una historia en redes sociales (si tú lo deseas)
+                                <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
+                                Un conejo kit al cumplir 1 año con envio gratis en México (Costo adicional envio a otros países).
                             </li>
+                            
+                            <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
+                                Acceso a evento exclusivo Anual de Socios
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
+                                Descuentos exclusivos en Conejo Merch 25% al 50% + 2x1 y 3x2
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
+                                ¡Video personalizado de cumpleaños!
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></div>
+                                Participación sorteo anual Conejo Merch firmada (entrega gratis en México, otros países pagando envio)
+                            </li>
+
+                            <li class="flex flex-col gap-2">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></div>
+                                    <span>Si lo deseas y si lo solicitas estoy más que agradecido y después de 6 meses puedo apoyar a tu empresa con:</span>
+                                </div>
+                                <ul class="ml-6 space-y-2 border-l border-brand-red/30 pl-4 text-gray-400">
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="text-brand-red text-xs leading-none mt-1 flex-shrink-0">▸</span>
+                                        <span>Un par de historias para tus redes sociales</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="text-brand-red text-xs leading-none mt-1 flex-shrink-0">▸</span>
+                                        <span>Tu nombre en el auto del conejo</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="text-brand-red text-xs leading-none mt-1 flex-shrink-0">▸</span>
+                                        <span>Videollamada personal (opcional)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="text-brand-red text-xs leading-none mt-1 flex-shrink-0">▸</span>
+                                        <span>Conejo Kit VIP de regalo (entrega gratis en México, otros países pagando envío)</span>
+                                    </li>
+                                </ul>
+                            </li>
+                          
+                            
                         </ul>
                         
                         <a href="#" class="block text-center w-full bg-brand-red text-white font-racing text-xl uppercase py-3 transition-colors hover:bg-red-700 rounded-xl shadow-[0_0_15px_rgba(230,32,32,0.4)]">Unirse a Elite</a>

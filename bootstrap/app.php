@@ -11,8 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->redirectUsersTo('/admin/dashboard');
-        $middleware->redirectGuestsTo('/admin/login');
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        ]);
+        $middleware->redirectUsersTo(fn (\Illuminate\Http\Request $request) => $request->user()?->isAdmin() ? '/admin/dashboard' : '/dashboard');
+        $middleware->redirectGuestsTo('/login');
         $middleware->validateCsrfTokens(except: ['webhooks/*']);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

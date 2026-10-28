@@ -9,16 +9,25 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
             
             <!-- Bienvenida -->
-            <div class="glass-panel p-6 border-l-4 border-brand-red">
-                <h3 class="text-xl font-bold text-white mb-2">¡Hola, {{ Auth::user()->name }}!</h3>
-                <p class="text-gray-400">Bienvenido a tu espacio privado. Aquí encontrarás todo el contenido exclusivo dependiendo de tu nivel de membresía en el Conejo Club.</p>
+            <div class="glass-panel p-6 border-l-4 border-brand-red flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-2">¡Hola, {{ Auth::user()->name }}!</h3>
+                    <p class="text-gray-400">Bienvenido a tu espacio privado. Aquí encontrarás todo el contenido exclusivo dependiendo de tu nivel de membresía en el Conejo Club.</p>
+                </div>
+                @if(Auth::user()->isAdmin())
+                    <a href="{{ route('admin.dashboard') }}" class="bg-brand-red hover:bg-brand-red-hover text-white px-6 py-3 font-racing uppercase tracking-wider text-lg transition-all duration-300 hover:scale-105 rounded-lg shadow-[0_0_20px_rgba(230,32,32,0.4)] text-center shrink-0">
+                        ⚙ Ir al Panel de Administración
+                    </a>
+                @endif
             </div>
 
             <!-- Verificación de Suscripción -->
             @php
                 $user = Auth::user();
                 $hasActiveSubscription = $user->hasActiveSubscription(); 
-                $userPlan = $hasActiveSubscription ? $user->subscription->plan_name : 'Ninguno';
+                $userPlan = $user->isAdmin()
+                    ? 'Administrador (Acceso Total)'
+                    : ($hasActiveSubscription && $user->subscription ? $user->subscription->plan_name : 'Ninguno');
             @endphp
 
             @if(!$hasActiveSubscription)

@@ -18,6 +18,8 @@ class AdminUserSeeder extends Seeder
             [
                 'name' => 'Administrador',
                 'password' => Hash::make('admin88'), // Contraseña por defecto
+                'is_admin' => true,
+                'email_verified_at' => now(),
             ]
         );
     }

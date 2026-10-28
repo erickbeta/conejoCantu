@@ -21,6 +21,13 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
+            if (! Auth::user()->isAdmin()) {
+                Auth::logout();
+                return back()->withErrors([
+                    'email' => 'Esta cuenta no tiene permisos de administrador.',
+                ])->onlyInput('email');
+            }
+
             $request->session()->regenerate();
             return redirect()->intended(route('admin.dashboard'));
         }

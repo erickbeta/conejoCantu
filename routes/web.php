@@ -50,7 +50,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
     // Panel de Control (Protegido)
-    Route::middleware('auth')->group(function () {
+    Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         
         // Biografía

@@ -15,6 +15,11 @@
                     <a href="{{ route('dashboard') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('dashboard') ? 'border-brand-red text-white' : 'border-transparent text-gray-400 hover:text-white hover:border-brand-red/50' }} text-sm font-medium leading-5 transition duration-150 ease-in-out font-racing uppercase tracking-widest text-xl mt-1">
                         Mi Panel
                     </a>
+                    @if(Auth::user()->isAdmin())
+                        <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('admin.*') ? 'border-brand-red text-white' : 'border-transparent text-brand-red hover:text-white hover:border-brand-red' }} text-sm font-medium leading-5 transition duration-150 ease-in-out font-racing uppercase tracking-widest text-xl mt-1">
+                            Panel Admin
+                        </a>
+                    @endif
                     <a href="/" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-gray-400 hover:text-white hover:border-brand-red/50 text-sm font-medium leading-5 transition duration-150 ease-in-out font-racing uppercase tracking-widest text-xl mt-1">
                         Volver a la Web
                     </a>

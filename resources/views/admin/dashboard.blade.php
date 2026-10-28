@@ -4,10 +4,14 @@
 
 @section('content')
 <header class="admin-header">
-    <a href="#" class="brand">CANTÚ<span>88</span></a>
+    <a href="/" class="brand">CANTÚ<span>88</span></a>
     
     <div class="user-menu">
-        <span>Hola, {{ auth()->user()->name }}</span>
+        <a href="{{ route('dashboard') }}" style="color: var(--color-gray); text-decoration: none; font-size: 0.9rem; margin-right: 10px;">Vista Miembro</a>
+        <span style="color: var(--color-gray); margin: 0 5px;">|</span>
+        <a href="/" style="color: var(--color-gray); text-decoration: none; font-size: 0.9rem; margin: 0 10px;">Ver Web</a>
+        <span style="color: var(--color-gray); margin: 0 5px;">|</span>
+        <span style="margin-left: 10px;">Hola, {{ auth()->user()->name }}</span>
         <span style="color: var(--color-gray); margin: 0 10px;">|</span>
         <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
