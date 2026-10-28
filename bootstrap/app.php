@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,8 +15,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
         ]);
-        $middleware->redirectUsersTo(fn (\Illuminate\Http\Request $request) => $request->user()?->isAdmin() ? '/admin/dashboard' : '/dashboard');
-        $middleware->redirectGuestsTo('/login');
+        $middleware->redirectUsersTo(fn (Request $request) => ($request->user()?->isAdmin() || $request->is('admin/*')) ? '/admin/dashboard' : '/dashboard');
+        $middleware->redirectGuestsTo(fn (Request $request) => $request->is('admin/*') ? '/admin/login' : '/login');
         $middleware->validateCsrfTokens(except: ['webhooks/*']);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
