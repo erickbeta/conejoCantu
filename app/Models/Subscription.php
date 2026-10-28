@@ -12,8 +12,11 @@ class Subscription extends Model
 
     protected $fillable = [
         'user_id',
+        'payer_email',
         'mercadopago_id',
+        'claim_token',
         'plan_name',
+        'amount',
         'status',
         'expires_at',
     ];

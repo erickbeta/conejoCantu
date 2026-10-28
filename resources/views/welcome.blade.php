@@ -136,6 +136,16 @@
                 <a href="#suscripciones" class="bg-brand-red text-white px-4 py-2 rounded-full text-xs uppercase font-bold tracking-wider">Unirme a Conejo Club</a>
             </div>
         </div>
+        @if(isset($unclaimedSubscription) && $unclaimedSubscription)
+            <div class="bg-green-500/20 border-t border-green-500/40 backdrop-blur-md px-6 py-2.5 text-center">
+                <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3 text-sm">
+                    <span class="text-green-400 font-bold">✓ ¡Tienes un pago confirmado ({{ $unclaimedSubscription->plan_name }}) pendiente de activar!</span>
+                    <a href="{{ route('register', ['payment_token' => $unclaimedSubscription->claim_token]) }}" class="bg-green-500 hover:bg-green-400 text-black font-bold px-4 py-1 rounded-full text-xs uppercase tracking-wider transition-all">
+                        Crear mi cuenta y activar membresía →
+                    </a>
+                </div>
+            </div>
+        @endif
     </nav>
 
     <!-- Hero Section -->
@@ -612,7 +622,7 @@
             <div class="text-center mb-16">
                 <div class="inline-block px-4 py-1 border border-white/10 text-brand-gray text-sm font-bold uppercase tracking-widest rounded-full mb-4">Membresías</div>
                 <h2 class="text-5xl md:text-7xl font-racing tracking-wide text-white mb-4 uppercase italic">Conejo <span class="text-brand-red">Club</span></h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light">Sé parte de esta historia. ¡Vamos juntos a la Fórmula 1!</p>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light">Hagamos historia hacia la F1!</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">

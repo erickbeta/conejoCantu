@@ -4,8 +4,23 @@
         <p class="text-gray-400 text-sm mt-2">Únete al Conejo Club para acceder a los mejores beneficios</p>
     </div>
 
+    @if(isset($pendingSubscription) && $pendingSubscription)
+        <div class="mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/40 text-left">
+            <div class="flex items-center gap-2 text-green-400 font-racing uppercase tracking-wider text-lg mb-1">
+                <span>✓ ¡Pago Confirmado! ({{ $pendingSubscription->plan_name }})</span>
+            </div>
+            <p class="text-xs text-gray-300 leading-relaxed">
+                Completa tus datos a continuación para crear tu cuenta y vincular automáticamente tu membresía recién adquirida.
+            </p>
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
+
+        @if(isset($pendingSubscription) && $pendingSubscription)
+            <input type="hidden" name="payment_token" value="{{ $pendingSubscription->claim_token }}">
+        @endif
 
         <!-- Name -->
         <div>
@@ -17,7 +32,7 @@
         <!-- Email Address -->
         <div class="mt-6">
             <label for="email" class="block font-medium text-sm text-gray-300">Correo Electrónico</label>
-            <input id="email" class="block mt-1 w-full bg-brand-black/50 border border-gray-600 focus:border-brand-red focus:ring focus:ring-brand-red/30 rounded-lg text-white py-2 px-3 placeholder-gray-500" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="ejemplo@correo.com" />
+            <input id="email" class="block mt-1 w-full bg-brand-black/50 border border-gray-600 focus:border-brand-red focus:ring focus:ring-brand-red/30 rounded-lg text-white py-2 px-3 placeholder-gray-500" type="email" name="email" value="{{ old('email', $pendingSubscription->payer_email ?? '') }}" required autocomplete="username" placeholder="ejemplo@correo.com" />
             <x-input-error :messages="$errors->get('email')" class="mt-2 text-brand-red" />
         </div>
 

@@ -24,10 +24,15 @@
             
             <p>Queremos agradecerte enormemente por tu aportación reciente ({{ $data['plan'] ?? 'Aportación Libre' }}). Gracias a personas como tú, el sueño de llegar a la Fórmula 1 está cada día más cerca.</p>
             
-            @if(isset($data['is_subscription']) && $data['is_subscription'])
+            @if(isset($data['claim_url']) && $data['claim_url'])
+            <p>Tu pago fue registrado exitosamente. Para activar tu membresía y acceder al contenido exclusivo, completa la creación de tu cuenta haciendo clic en el siguiente botón:</p>
+            <div style="text-align: center;">
+                <a href="{{ $data['claim_url'] }}" class="btn">Crear mi Cuenta y Activar Membresía</a>
+            </div>
+            @elseif(isset($data['is_subscription']) && $data['is_subscription'])
             <p>Tu membresía ha sido activada exitosamente. Ya puedes acceder a todo el contenido exclusivo directamente desde tu Panel Privado.</p>
             <div style="text-align: center;">
-                <a href="{{ url('/admin/dashboard') }}" class="btn">Ir a mi Panel</a>
+                <a href="{{ url('/dashboard') }}" class="btn">Ir a mi Panel</a>
             </div>
             @endif
             

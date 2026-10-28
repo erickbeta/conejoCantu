@@ -8,6 +8,18 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
             
+            @if(session('success'))
+                <div class="p-4 rounded-xl bg-green-500/10 border border-green-500/40 text-green-400 font-medium">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="p-4 rounded-xl bg-brand-red/10 border border-brand-red/40 text-red-400 font-medium">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <!-- Bienvenida -->
             <div class="glass-panel p-6 border-l-4 border-brand-red flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
@@ -48,6 +60,19 @@
                         <a href="/#suscripciones" class="bg-brand-red hover:bg-brand-red-hover text-white px-8 py-3 font-racing uppercase tracking-wider text-xl transition-all duration-300 hover:scale-105 rounded-lg shadow-[0_0_20px_rgba(230,32,32,0.4)]">
                             Ver Planes de Suscripción
                         </a>
+
+                        <!-- Recuperación manual de pago -->
+                        <div class="mt-10 pt-8 border-t border-white/10 w-full max-w-md">
+                            <p class="text-sm text-gray-300 font-semibold mb-1">¿Ya realizaste tu pago y cerraste la ventana?</p>
+                            <p class="text-xs text-gray-400 mb-4">Ingresa tu número de operación/comprobante de Mercado Pago o el correo con el que pagaste para vincular tu membresía:</p>
+                            <form action="{{ route('payment.claim') }}" method="POST" class="flex flex-col sm:flex-row gap-2">
+                                @csrf
+                                <input type="text" name="reference" required placeholder="Ej. 1234567890 o correo@ejemplo.com" class="flex-grow bg-brand-black/80 border border-white/20 rounded-lg px-4 py-2 text-sm text-white placeholder-gray-500 focus:border-brand-red focus:outline-none">
+                                <button type="submit" class="bg-white/10 hover:bg-brand-red text-white font-racing uppercase tracking-wider px-5 py-2 rounded-lg transition-colors text-base shrink-0">
+                                    Vincular Pago
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             @else

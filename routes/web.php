@@ -15,14 +15,28 @@ use App\Models\Content;
 use App\Models\Partner;
 
 // Vista Pública (Landing Page)
-Route::get('/', function () {
+Route::get('/', function (\Illuminate\Http\Request $request) {
     $biography = Biography::where('is_active', true)->first();
     $sections = \App\Models\Content::orderBy('sort_order', 'asc')->get();
     $partners = \App\Models\Partner::where('is_active', true)->orderBy('sort_order')->get();
     $settings = \App\Models\Setting::all()->keyBy('key');
     $merches = \App\Models\Merch::where('is_active', true)->orderBy('sort_order')->get();
     $featuredRace = \App\Models\FeaturedRace::first();
-    return view('welcome', compact('biography', 'sections', 'partners', 'settings', 'merches', 'featuredRace'));
+
+    $unclaimedSubscription = null;
+    if (! auth()->check()) {
+        $claimToken = session('claim_subscription_token')
+            ?? $request->cookie('claim_subscription_token')
+            ?? session('pending_subscription_token');
+        if ($claimToken) {
+            $unclaimedSubscription = \App\Models\Subscription::where('claim_token', $claimToken)
+                ->whereNull('user_id')
+                ->where('status', 'active')
+                ->first();
+        }
+    }
+
+    return view('welcome', compact('biography', 'sections', 'partners', 'settings', 'merches', 'featuredRace', 'unclaimedSubscription'));
 });
 
 // Checkout de Merch (Mercado Pago)
@@ -108,10 +122,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
-    // Suscripciones
-    Route::get('/subscribe/{plan}', [\App\Http\Controllers\SubscriptionController::class, 'subscribe'])->name('subscribe');
 });
+
+// Suscripciones y Retorno de Pago (Públicas para permitir pagar y luego crear cuenta)
+Route::get('/subscribe/{plan}', [\App\Http\Controllers\SubscriptionController::class, 'subscribe'])->name('subscribe');
+Route::get('/payment/callback', [\App\Http\Controllers\SubscriptionController::class, 'handleCallback'])->name('payment.callback');
+Route::post('/payment/claim', [\App\Http\Controllers\SubscriptionController::class, 'claimPayment'])->middleware('auth')->name('payment.claim');
 
 // Webhook de Mercado Pago
 Route::post('/webhooks/mercadopago', [\App\Http\Controllers\WebhookController::class, 'handleWebhook'])->name('webhook.mp');

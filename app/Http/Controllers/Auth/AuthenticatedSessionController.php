@@ -26,7 +26,39 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        $token = $request->input('payment_token')
+            ?? session('claim_subscription_token')
+            ?? $request->cookie('claim_subscription_token')
+            ?? session('pending_subscription_token');
+
         $request->session()->regenerate();
+
+        $user = $request->user();
+        $subscription = null;
+
+        if ($token) {
+            $subscription = \App\Models\Subscription::where('claim_token', $token)
+                ->whereNull('user_id')
+                ->first();
+        }
+
+        if (! $subscription) {
+            $subscription = \App\Models\Subscription::where('payer_email', $user->email)
+                ->whereNull('user_id')
+                ->where('status', 'active')
+                ->latest()
+                ->first();
+        }
+
+        if ($subscription) {
+            $subscription->update([
+                'user_id' => $user->id,
+                'status' => 'active',
+                'expires_at' => $subscription->expires_at ?? now()->addMonth(),
+            ]);
+            session()->forget(['claim_subscription_token', 'pending_subscription_token']);
+            \Illuminate\Support\Facades\Cookie::queue(\Illuminate\Support\Facades\Cookie::forget('claim_subscription_token'));
+        }
 
         if ($request->user()->isAdmin()) {
             return redirect()->intended(route('admin.dashboard', absolute: false));
