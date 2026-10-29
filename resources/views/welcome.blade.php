@@ -298,7 +298,7 @@
     </main>
 
     <!-- Estadísticas (Grid de Tarjetas) y Trayectoria -->
-    <section id="estadisticas" class="py-16 px-6 bg-brand-black relative z-20 border-b border-white/5">
+    <section id="estadisticas" class="py-16 px-6 bg-brand-black relative z-20 border-b border-white/5 scroll-mt-20">
         <div class="max-w-7xl mx-auto">
             
             <!-- Tarjetas Superiores -->
@@ -485,7 +485,7 @@
     </section>
 
     <!-- Biografía & Secciones Dinámicas (Grid Híbrido) -->
-    <section id="biografia" class="py-20 px-6 relative bg-brand-black">
+    <section id="biografia" class="py-20 px-6 relative bg-brand-black scroll-mt-20">
         <div class="max-w-7xl mx-auto space-y-12">
             
             @if($biography)
@@ -1527,7 +1527,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
 
             // --- Animaciones al hacer Scroll (Reveal suave) ---
             // Seleccionamos elementos clave como secciones, tarjetas y componentes del grid
-            const revealElements = document.querySelectorAll('section > div > h2, .bg-brand-dark, footer');
+            const revealElements = document.querySelectorAll('section > div > h2, section .bg-brand-dark, footer');
             
             // Les aplicamos las clases iniciales ocultas (Tailwind)
             revealElements.forEach(el => {
@@ -1546,9 +1546,31 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { root: null, rootMargin: '0px', threshold: 0.15 });
+            }, { root: null, rootMargin: '0px', threshold: 0.05 });
 
             revealElements.forEach(el => revealObserver.observe(el));
+
+            // --- Navegación exacta por Hash / Código QR (ej. /#suscripciones) ---
+            const scrollToHashSection = () => {
+                if (!window.location.hash) return;
+                const targetId = window.location.hash.substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    // Mostrar inmediatamente los elementos dentro de la sección destino
+                    targetSection.querySelectorAll('.opacity-0').forEach(el => {
+                        el.classList.remove('opacity-0', 'translate-y-10', 'translate-y-12');
+                        el.classList.add('opacity-100', 'translate-y-0');
+                    });
+                    const navbarHeight = document.getElementById('navbar')?.offsetHeight || 80;
+                    const topPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                    window.scrollTo({ top: topPosition, behavior: 'smooth' });
+                }
+            };
+
+            if (window.location.hash) {
+                setTimeout(scrollToHashSection, 150);
+                window.addEventListener('load', () => setTimeout(scrollToHashSection, 200));
+            }
 
             // --- Animación del Timeline ---
             const timelineItems = document.querySelectorAll('.fade-timeline-item');
