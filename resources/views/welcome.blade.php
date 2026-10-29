@@ -129,7 +129,7 @@
             
             <!-- Menú Escritorio -->
             <div class="hidden lg:flex items-center gap-8 font-medium">
-                <a href="#biografia" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Biografía</a>
+                <a href="#carrera-destacada" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Biografía</a>
                 <a href="#merch" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Merch</a>
                 <a href="#colaboradores" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Partners</a>
                 <a href="#contacto" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Contacto</a>
@@ -181,7 +181,7 @@
              style="display: none;"
              class="lg:hidden bg-brand-dark/95 backdrop-blur-xl border-t border-brand-red/30 px-6 py-5 space-y-3 shadow-2xl">
             <div class="flex flex-col space-y-2">
-                <a @click="mobileMenuOpen = false" href="#biografia" class="py-2 px-3 rounded-lg text-gray-200 hover:text-white hover:bg-brand-red/20 uppercase font-racing text-2xl tracking-widest transition-colors">Biografía</a>
+                <a @click="mobileMenuOpen = false" href="#carrera-destacada" class="py-2 px-3 rounded-lg text-gray-200 hover:text-white hover:bg-brand-red/20 uppercase font-racing text-2xl tracking-widest transition-colors">Biografía</a>
                 <a @click="mobileMenuOpen = false" href="#merch" class="py-2 px-3 rounded-lg text-gray-200 hover:text-white hover:bg-brand-red/20 uppercase font-racing text-2xl tracking-widest transition-colors">Merch</a>
                 <a @click="mobileMenuOpen = false" href="#colaboradores" class="py-2 px-3 rounded-lg text-gray-200 hover:text-white hover:bg-brand-red/20 uppercase font-racing text-2xl tracking-widest transition-colors">Partners</a>
                 <a @click="mobileMenuOpen = false" href="#contacto" class="py-2 px-3 rounded-lg text-gray-200 hover:text-white hover:bg-brand-red/20 uppercase font-racing text-2xl tracking-widest transition-colors">Contacto</a>
@@ -250,7 +250,7 @@
                         <div class="absolute inset-0 bg-brand-red skew-x-[-12deg] rounded-sm transition-all duration-300 group-hover:bg-red-700"></div>
                         <span class="relative mt-1">{{ $settings['hero_button_1_text']->value ?? 'Apoyar al Piloto' }}</span>
                     </a>
-                    <a href="#biografia" class="group relative inline-flex items-center justify-center px-8 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto mt-2 sm:mt-0 whitespace-nowrap">
+                    <a href="#carrera-destacada" class="group relative inline-flex items-center justify-center px-8 py-3 font-racing text-2xl uppercase tracking-wider text-white transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto mt-2 sm:mt-0 whitespace-nowrap">
                         <div class="absolute inset-0 bg-white/5 border border-white/20 skew-x-[-12deg] rounded-sm transition-all duration-300 group-hover:bg-white/10"></div>
                         <span class="relative mt-1">{{ $settings['hero_button_2_text']->value ?? 'Conocer Más' }}</span>
                     </a>
@@ -399,7 +399,7 @@
     </section>
 
     <!-- Carrera Destacada (Estilo Widget Retrospectivo) -->
-    <section id="carrera-destacada" class="py-20 px-6 bg-brand-black relative">
+    <section id="carrera-destacada" class="py-20 px-6 bg-brand-black relative scroll-mt-20">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center gap-4 mb-8">
                 <div class="w-2 h-8 bg-brand-red rounded-sm"></div>
@@ -643,9 +643,8 @@
         </div>
     </section>
 
-    @if(isset($merches) && $merches->count() > 0)
     <!-- Sección de Merch (Minimalista Cristal) -->
-    <section id="merch" class="py-24 px-6 bg-brand-black relative z-20">
+    <section id="merch" class="py-24 px-6 bg-brand-black relative z-20 scroll-mt-20">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <div class="inline-block px-4 py-1 border border-white/20 text-white/60 text-sm font-bold uppercase tracking-widest rounded-full mb-4 backdrop-blur-md">Tienda Oficial</div>
@@ -653,6 +652,7 @@
                 <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light">Vístete con los colores del equipo y apoya a Cristian en cada carrera.</p>
             </div>
             
+            @if(isset($merches) && $merches->count() > 0)
             <div class="flex flex-wrap justify-center gap-8">
                 @foreach($merches as $merch)
                 <!-- Tarjeta de Merch Minimalista -->
@@ -676,6 +676,12 @@
                 </div>
                 @endforeach
             </div>
+            @else
+            <div class="text-center py-12 px-6 bg-white/5 border border-white/10 rounded-2xl max-w-xl mx-auto">
+                <p class="font-racing text-2xl uppercase tracking-widest text-gray-300 mb-2">Próximamente Nueva Colección</p>
+                <p class="text-sm text-gray-400 font-light">Estamos preparando los artículos oficiales de la temporada. ¡Mantente atento!</p>
+            </div>
+            @endif
         </div>
     </section>
 
@@ -709,10 +715,9 @@
             </div>
         </div>
     </div>
-    @endif
 
     <!-- Opciones de Suscripción (Tarjetas Fusión) -->
-    <section id="suscripciones" class="py-24 px-6 bg-brand-black relative">
+    <section id="suscripciones" class="py-24 px-6 bg-brand-black relative scroll-mt-20">
         <div class="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_bottom_center,_var(--tw-gradient-stops))] from-brand-red/20 via-transparent to-transparent"></div>
         
         <div class="max-w-7xl mx-auto relative z-10">
@@ -1018,9 +1023,8 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
         </div>
     </section>
 
-    @if(isset($partners) && $partners->count() > 0)
     <!-- Sección de Colaboradores (Diseño Premium) -->
-    <section id="colaboradores" class="py-24 px-6 relative z-20 overflow-hidden bg-brand-black">
+    <section id="colaboradores" class="py-24 px-6 relative z-20 overflow-hidden bg-brand-black scroll-mt-20">
         <!-- Fondos y destellos -->
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-red/10 via-brand-black to-brand-black opacity-60"></div>
         <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-red/50 to-transparent"></div>
@@ -1037,6 +1041,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                 <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light">Marcas e instituciones que hacen posible este sueño y aceleran junto a nosotros hacia la cima.</p>
             </div>
             
+            @if(isset($partners) && $partners->count() > 0)
             @php
                 $featuredPartners = $partners->where('is_featured', true)->values();
                 $otherPartners = $partners->where('is_featured', false)->values();
@@ -1188,13 +1193,19 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                 </div>
             </div>
             @endif
+            @else
+            <div class="text-center py-12 px-6 bg-white/5 border border-white/10 rounded-2xl max-w-xl mx-auto">
+                <p class="font-racing text-2xl uppercase tracking-widest text-gray-300 mb-2">¿Quieres ser Aliado Oficial?</p>
+                <p class="text-sm text-gray-400 font-light mb-4">Únete a las marcas que impulsan nuestra carrera rumbo a la Fórmula 1.</p>
+                <a href="#contacto" class="inline-block bg-brand-red hover:bg-red-700 text-white font-racing uppercase tracking-widest text-lg px-6 py-2 rounded-lg transition-colors">Contáctanos</a>
+            </div>
+            @endif
         </div>
     </section>
-    @endif
 
 
     <!-- Sección de Contacto -->
-    {{-- <section id="contacto" class="py-24 px-6 relative z-20 overflow-hidden bg-brand-dark">
+    <section id="contacto" class="py-24 px-6 relative z-20 overflow-hidden bg-brand-dark scroll-mt-20">
         <!-- Elementos decorativos de fondo -->
         <div class="absolute top-0 right-0 w-96 h-96 bg-brand-red rounded-full blur-[120px] opacity-10"></div>
         <div class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-[100px] opacity-5"></div>
@@ -1273,7 +1284,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                 </form>
             </div>
         </div>
-    </section> --}}
+    </section>
 
     <!-- Footer -->
     <footer class="bg-brand-black border-t border-white/5 py-12 flex flex-col items-center justify-center gap-6 relative z-20">
