@@ -34,7 +34,13 @@ class RegisteredUserController extends Controller
         if ($token) {
             $pendingSubscription = Subscription::where('claim_token', $token)
                 ->whereNull('user_id')
+                ->where('status', 'active')
                 ->first();
+
+            if (! $pendingSubscription) {
+                Cookie::queue(Cookie::forget('claim_subscription_token'));
+                session()->forget(['claim_subscription_token', 'pending_subscription_token']);
+            }
         }
 
         return view('auth.register', compact('pendingSubscription'));
@@ -73,6 +79,7 @@ class RegisteredUserController extends Controller
         if ($token) {
             $subscription = Subscription::where('claim_token', $token)
                 ->whereNull('user_id')
+                ->where('status', 'active')
                 ->first();
         }
 

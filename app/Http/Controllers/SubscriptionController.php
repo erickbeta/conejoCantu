@@ -88,9 +88,8 @@ class SubscriptionController extends Controller
             'status' => 'pending',
         ]);
 
-        // Guardar en sesión y en cookie de 30 días por si cierra o recarga el navegador
+        // Guardar solo en sesión temporal mientras va a Mercado Pago (la cookie se crea únicamente si el pago es aprobado)
         session(['pending_subscription_token' => $claimToken]);
-        Cookie::queue('claim_subscription_token', $claimToken, 60 * 24 * 30);
 
         $baseUrl = rtrim(config('app.url', 'https://conejocantu.com'), '/');
         if (str_contains($baseUrl, 'localhost') || str_contains($baseUrl, '127.0.0.1') || str_contains($baseUrl, '192.168')) {
@@ -223,9 +222,11 @@ class SubscriptionController extends Controller
             }
         }
 
-        if (in_array($mpStatus, ['rejected', 'cancelled'], true)) {
+        if (! in_array($mpStatus, ['approved', 'authorized'], true) && $subscription->status !== 'active') {
             $subscription->update(['status' => 'cancelled']);
-            return redirect('/#suscripciones')->with('error', 'El pago fue rechazado por Mercado Pago.');
+            session()->forget(['pending_subscription_token', 'claim_subscription_token']);
+            Cookie::queue(Cookie::forget('claim_subscription_token'));
+            return redirect('/#suscripciones')->with('error', 'El pago no fue completado en Mercado Pago.');
         }
 
         $wasAlreadyActive = $subscription->status === 'active';
