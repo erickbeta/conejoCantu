@@ -120,21 +120,26 @@
     <div id="reading-progress" class="fixed top-0 left-0 h-1 bg-brand-red z-[60] transition-all duration-100 w-0"></div>
 
     <!-- Menú de Navegación Flotante -->
-    <nav class="fixed top-0 w-full z-50 bg-brand-black/80 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="/" class="flex items-center gap-3 transition-transform hover:scale-105">
+    <nav x-data="{ mobileMenuOpen: false }" class="fixed top-0 w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 transition-transform hover:scale-105 shrink-0">
                 <img src="{{ asset('images/logos/conejo-color.png') }}" alt="Conejo Cantú" class="h-6 md:h-8 w-auto object-contain">
-                <img src="{{ asset('images/logos/logo2.png') }}" alt="Logo 88" class="h-10 md:h-12 w-auto object-contain">
+                <img src="{{ asset('images/logos/logo2.png') }}" alt="Logo 88" class="h-9 md:h-12 w-auto object-contain">
             </a>
             
-            <div class="hidden md:flex items-center gap-8 font-medium">
+            <!-- Menú Escritorio -->
+            <div class="hidden lg:flex items-center gap-8 font-medium">
                 <a href="#biografia" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Biografía</a>
                 <a href="#merch" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Merch</a>
                 <a href="#colaboradores" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Partners</a>
                 <a href="#contacto" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest">Contacto</a>
                 
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest ml-4">Mi Cuenta</a>
+                    @if(auth()->user()->isAdmin())
+                        <a href="{{ route('admin.dashboard') }}" class="text-brand-red hover:text-white transition-colors uppercase font-racing text-xl tracking-widest ml-4">Panel Admin</a>
+                    @else
+                        <a href="{{ url('/dashboard') }}" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest ml-4">Mi Cuenta</a>
+                    @endif
                 @else
                     <a href="{{ route('login') }}" class="text-gray-300 hover:text-brand-red transition-colors uppercase font-racing text-xl tracking-widest ml-4">Login</a>
                 @endauth
@@ -147,9 +152,67 @@
                 <a href="#suscripciones" class="bg-brand-red hover:bg-brand-red-hover text-white px-8 py-2 font-racing uppercase tracking-wider text-xl transition-all duration-300 hover:scale-105 pulse-glow" style="clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);">Unirme a Conejo Club</a>
             </div>
             
-            <!-- Menú Móvil Simple -->
-            <div class="md:hidden">
-                <a href="#suscripciones" class="bg-brand-red text-white px-4 py-2 rounded-full text-xs uppercase font-bold tracking-wider">Unirme a Conejo Club</a>
+            <!-- Controles Móvil / Tablet -->
+            <div class="flex lg:hidden items-center gap-2.5">
+                <a href="#suscripciones" class="bg-brand-red hover:bg-red-700 text-white px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs uppercase font-bold tracking-wider whitespace-nowrap shadow-[0_0_15px_rgba(230,32,32,0.4)]">
+                    Unirme al Club
+                </a>
+                <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 focus:outline-none transition-colors" aria-label="Abrir menú de navegación">
+                    <!-- Icono Hamburguesa -->
+                    <svg x-show="!mobileMenuOpen" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <!-- Icono Cerrar -->
+                    <svg x-show="mobileMenuOpen" style="display: none;" class="h-6 w-6 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div x-show="mobileMenuOpen"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-2"
+             style="display: none;"
+             class="lg:hidden bg-brand-dark/95 backdrop-blur-xl border-t border-brand-red/30 px-6 py-5 space-y-3 shadow-2xl">
+            <div class="flex flex-col space-y-2">
+                <a @click="mobileMenuOpen = false" href="#biografia" class="py-2 px-3 rounded-lg text-gray-200 hover:text-white hover:bg-brand-red/20 uppercase font-racing text-2xl tracking-widest transition-colors">Biografía</a>
+                <a @click="mobileMenuOpen = false" href="#merch" class="py-2 px-3 rounded-lg text-gray-200 hover:text-white hover:bg-brand-red/20 uppercase font-racing text-2xl tracking-widest transition-colors">Merch</a>
+                <a @click="mobileMenuOpen = false" href="#colaboradores" class="py-2 px-3 rounded-lg text-gray-200 hover:text-white hover:bg-brand-red/20 uppercase font-racing text-2xl tracking-widest transition-colors">Partners</a>
+                <a @click="mobileMenuOpen = false" href="#contacto" class="py-2 px-3 rounded-lg text-gray-200 hover:text-white hover:bg-brand-red/20 uppercase font-racing text-2xl tracking-widest transition-colors">Contacto</a>
+                <a @click="mobileMenuOpen = false" href="#suscripciones" class="py-2 px-3 rounded-lg text-brand-red hover:text-white hover:bg-brand-red/20 uppercase font-racing text-2xl tracking-widest transition-colors">Membresías Conejo Club</a>
+            </div>
+
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between gap-4">
+                @auth
+                    @if(auth()->user()->isAdmin())
+                        <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center justify-center bg-brand-red text-white font-racing uppercase tracking-widest text-xl px-6 py-2 rounded-lg w-full text-center">
+                            Panel Admin
+                        </a>
+                    @else
+                        <a href="{{ url('/dashboard') }}" class="inline-flex items-center justify-center bg-white/10 hover:bg-brand-red text-white font-racing uppercase tracking-widest text-xl px-6 py-2 rounded-lg w-full text-center transition-colors">
+                            Mi Cuenta
+                        </a>
+                    @endif
+                @else
+                    <a href="{{ route('login') }}" class="inline-flex items-center justify-center bg-white/10 hover:bg-brand-red text-white font-racing uppercase tracking-widest text-xl px-6 py-2 rounded-lg flex-1 text-center transition-colors">
+                        Iniciar Sesión
+                    </a>
+                    <a href="{{ route('register') }}" class="inline-flex items-center justify-center bg-brand-red hover:bg-red-700 text-white font-racing uppercase tracking-widest text-xl px-6 py-2 rounded-lg flex-1 text-center transition-colors">
+                        Registrarse
+                    </a>
+                @endauth
+            </div>
+
+            <div class="pt-2 flex justify-center">
+                <a href="#" onclick="openSocialModal(event)" class="inline-flex items-center gap-3 text-gray-300 hover:text-white py-1">
+                    <img src="{{ asset('images/logos/redes-blanco.png') }}" alt="Redes Sociales" class="h-8 w-auto object-contain">
+                </a>
             </div>
         </div>
         @if(isset($unclaimedSubscription) && $unclaimedSubscription)
@@ -172,14 +235,14 @@
         
         <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10 flex-grow">
             <!-- Text Left -->
-            <div class="lg:col-span-5 p-6 md:p-8 animate-fade-in-up text-left">
+            <div class="lg:col-span-4 p-4 md:p-6 animate-fade-in-up text-left">
                 <div class="inline-block px-4 py-1 border border-brand-red/50 text-brand-red font-racing text-xl mb-6 rounded-tl-lg rounded-br-lg" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
                     {{ $settings['hero_badge']->value ?? 'PILOTO DE FÓRMULA 3' }}
                 </div>
                 <div class="mb-8 mt-2">
                     <img src="{{ asset('images/logos/letrero-conejo.png') }}" alt="Conejo Cantú" class="w-full max-w-[300px] md:max-w-md object-contain filter drop-shadow-[0_0_20px_rgba(230,32,32,0.3)] mx-auto md:mx-0">
                 </div>
-                <p class="text-brand-gray text-xl md:text-2xl mb-10 font-light uppercase tracking-widest h-16 md:h-10">
+                <p class="text-brand-gray text-lg sm:text-xl md:text-2xl mb-6 font-light uppercase tracking-widest min-h-[4.5rem] md:min-h-[3rem]">
                     <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 opacity-0 translate-y-4 pt-4" id="hero-buttons" style="transition: opacity 1s ease, transform 1s ease;">
@@ -194,38 +257,26 @@
                 </div>
             </div>
 
-            <!-- Banner Central ¡SÚMATE AQUÍ! (Entre el letrero y la foto) -->
-            <div class="lg:col-span-2 flex justify-center items-center z-20 my-2 lg:my-0 lg:-mt-16">
-                <a href="#suscripciones" class="group relative flex flex-col items-center justify-center text-center bg-gradient-to-br from-brand-dark via-brand-black to-brand-red/90 border-2 border-brand-red px-6 py-6 w-full max-w-[230px] text-white shadow-[0_0_35px_rgba(230,32,32,0.45)] hover:shadow-[0_0_50px_rgba(230,32,32,0.85)] transition-all duration-300 hover:-translate-y-2 hover:scale-105 overflow-hidden pulse-glow floating" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);">
+            <!-- Banner Central ¡SÚMATE AQUÍ! (Con imagen GrupoLagunasV5 de fondo) -->
+            <div class="lg:col-span-4 flex justify-center items-center z-20 my-4 lg:my-0">
+                <a href="#suscripciones" class="group relative block w-full max-w-md rounded-2xl border-2 border-brand-red bg-black shadow-[0_0_35px_rgba(230,32,32,0.45)] hover:shadow-[0_0_50px_rgba(230,32,32,0.85)] transition-all duration-300 hover:-translate-y-2 hover:scale-[1.03] overflow-hidden pulse-glow floating" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);">
+                    <!-- Imagen de fondo adaptada al contenedor -->
+                    <img src="{{ asset('images/GrupoLagunasV5.jpg') }}" alt="¡Súmate Aquí!" class="w-full h-auto object-contain block transition-transform duration-500 group-hover:scale-105">
+
                     <!-- Barrido de luz (Shimmer) -->
-                    <div class="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/25 to-transparent animate-racing-shimmer pointer-events-none"></div>
+                    <div class="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-racing-shimmer pointer-events-none"></div>
 
-                    <!-- Indicador luminoso superior -->
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="relative flex h-2.5 w-2.5">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-red opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-red"></span>
+                    <!-- Único letrero: ¡SÚMATE AQUÍ! -->
+                    <div class="w-full bg-gradient-to-r from-brand-black via-brand-red to-brand-black py-2.5 px-4 text-center border-t border-brand-red/60">
+                        <span class="font-racing text-3xl sm:text-4xl uppercase tracking-widest text-white group-hover:text-yellow-400 transition-colors leading-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+                            ¡SÚMATE AQUÍ!
                         </span>
-                        <span class="text-[11px] uppercase tracking-[0.2em] text-gray-300 font-bold"></span>
-                    </div>
-
-                    <span class="font-racing text-3xl sm:text-4xl uppercase tracking-wider text-white group-hover:text-yellow-400 transition-colors leading-none my-1">
-                        ¡SÚMATE AQUÍ!
-                    </span>
-
-                    <span class="text-xs text-gray-300 font-light mt-1 mb-3">Sé parte del equipo rumbo a F1</span>
-
-                    <div class="inline-flex items-center gap-1 bg-brand-red group-hover:bg-white group-hover:text-brand-black text-white font-racing uppercase tracking-widest text-base px-4 py-1 rounded transition-colors">
-                        <span>Ver Planes</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 animate-arrow-nudge" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-                        </svg>
                     </div>
                 </a>
             </div>
             
             <!-- Image Placeholder Right -->
-            <div class="lg:col-span-5 flex justify-center items-end h-[50vh] md:h-[60vh] lg:h-[80vh] relative animate-fade-in-up mt-8 lg:mt-0" style="animation-delay: 0.3s;">
+            <div class="lg:col-span-4 flex justify-center items-end h-[50vh] md:h-[60vh] lg:h-[80vh] relative animate-fade-in-up mt-8 lg:mt-0" style="animation-delay: 0.3s;">
                 <!-- Efecto de resplandor detrás del piloto -->
                 <div class="absolute inset-0 bg-brand-red/5 blur-[100px] rounded-full z-0"></div>
                 <div class="w-full h-full bg-gradient-to-t from-brand-black via-transparent to-transparent absolute bottom-0 left-0 z-20"></div>
@@ -233,7 +284,7 @@
                 <div class="text-white/5 font-racing text-[15rem] absolute -right-10 top-10 select-none z-0 leading-none">88</div>
                 
                 <!-- Caja de imagen con diseño fusión (bordes redondeados + corte) -->
-                <div class="w-5/6 lg:w-11/12 h-5/6 border border-white/10 bg-brand-dark/30 backdrop-blur-sm rounded-2xl flex items-center justify-center relative z-10 overflow-hidden floating" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); box-shadow: inset 0 0 20px rgba(255,255,255,0.02);">
+                <div class="w-full h-5/6 border border-white/10 bg-brand-dark/30 backdrop-blur-sm rounded-2xl flex items-center justify-center relative z-10 overflow-hidden floating" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); box-shadow: inset 0 0 20px rgba(255,255,255,0.02);">
                     @if(isset($settings['hero_image']) && $settings['hero_image']->value)
                         <img src="{{ asset('storage/' . $settings['hero_image']->value) }}" alt="Cristian Cantú" class="w-full h-full object-cover animate-grayscale-loop">
                     @else
