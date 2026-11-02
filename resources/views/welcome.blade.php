@@ -983,7 +983,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                             <div class="flex flex-col sm:flex-row gap-3 w-full">
                                 <div class="relative flex-grow">
                                     <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-400 font-bold">$</span>
-                                    <input type="number" name="amount" min="2888" value="2888" placeholder="2888" required class="w-full bg-brand-dark border-2 border-purple-500/30 text-white rounded-xl py-3 pl-10 pr-4 focus:border-purple-400 focus:ring-0 outline-none transition-all font-sans">
+                                    <input type="number" name="amount" min="100" value="100" placeholder="100" required class="w-full bg-brand-dark border-2 border-purple-500/30 text-white rounded-xl py-3 pl-10 pr-4 focus:border-purple-400 focus:ring-0 outline-none transition-all font-sans">
                                 </div>
                                 <button type="submit" class="inline-flex items-center justify-center bg-purple-500/10 border-2 border-purple-500 text-purple-400 font-racing text-xl uppercase py-3 px-8 transition-all hover:bg-purple-500 hover:text-black rounded-xl group-hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]">
                                     Suscribir

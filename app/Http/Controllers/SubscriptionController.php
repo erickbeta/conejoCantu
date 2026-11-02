@@ -57,7 +57,7 @@ class SubscriptionController extends Controller
 
     public function donateRecurring(Request $request)
     {
-        $request->validate(['amount' => 'required|numeric|min:2888']);
+        $request->validate(['amount' => 'required|numeric|min:100']);
         $amount = (float) $request->amount;
 
         return $this->initiateCheckout(
