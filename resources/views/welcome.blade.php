@@ -929,7 +929,39 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
             <!-- Suscripciones Adicionales (Diamante y Aliado) -->
             <div class="mt-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Club Diamante -->
+                <!-- Aportación Mensual (antes Club Diamante) -->
+                <div class="bg-brand-black border border-purple-500/30 flex flex-col items-start shadow-2xl transition-all duration-300 hover:border-purple-400 hover:-translate-y-2 rounded-2xl overflow-hidden relative group p-8 md:p-10">
+                    <!-- Destello de fondo -->
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                    
+                    <div class="relative z-10 flex-grow mb-8">
+                        <div class="flex items-center gap-3 mb-2">
+                            <h4 class="text-3xl font-racing uppercase text-purple-400 tracking-wide">Aportación Mensual</h4>
+                        </div>
+                        <div class="font-racing text-2xl text-white mb-4">Aportación Mensual Libre</div>
+                        <p class="text-gray-400 text-sm font-light leading-relaxed mb-2">
+                            {!! nl2br(e($settings['club_diamante_desc']->value ?? '¿Quieres apoyar de manera constante y a tu medida? Aporta la cantidad que desees mes con mes y sé el motor de este sueño. ¡Cualquier apoyo es clave!')) !!}
+                        </p>
+                    </div>
+                    
+                    <div class="w-full relative z-10">
+                        <form action="{{ route('donate.recurring') }}" method="POST" class="flex flex-col gap-1 sm:gap-3">
+                            @csrf
+                            <div class="flex flex-col sm:flex-row gap-3 w-full">
+                                <div class="relative flex-grow">
+                                    <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-400 font-bold">$</span>
+                                    <input type="number" name="amount" min="100" required class="w-full bg-brand-dark border-2 border-purple-500/30 text-white rounded-xl py-3 pl-10 pr-4 focus:border-purple-400 focus:ring-0 outline-none transition-all font-sans">
+                                </div>
+                                <button type="submit" class="inline-flex items-center justify-center bg-purple-500/10 border-2 border-purple-500 text-purple-400 font-racing text-xl uppercase py-3 px-8 transition-all hover:bg-purple-500 hover:text-black rounded-xl group-hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+                                    Suscribir
+                                </button>
+                            </div>
+                            @error('amount') <span class="text-brand-red text-xs mt-1">{{ $message }}</span> @enderror
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Aportación Única -->
                 <div class="bg-brand-black border border-cyan-500/30 flex flex-col items-start shadow-2xl transition-all duration-300 hover:border-cyan-400 hover:-translate-y-2 rounded-2xl overflow-hidden relative group p-8 md:p-10">
                     <!-- Destello de fondo -->
                     <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
@@ -950,42 +982,10 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                             <div class="flex flex-col sm:flex-row gap-3 w-full">
                                 <div class="relative flex-grow">
                                     <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyan-400 font-bold">$</span>
-                                    <input type="number" name="amount" min="188" value="188" placeholder="188" required class="w-full bg-brand-dark border-2 border-cyan-500/30 text-white rounded-xl py-3 pl-10 pr-4 focus:border-cyan-400 focus:ring-0 outline-none transition-all font-sans">
+                                    <input type="number" name="amount" min="188" required class="w-full bg-brand-dark border-2 border-cyan-500/30 text-white rounded-xl py-3 pl-10 pr-4 focus:border-cyan-400 focus:ring-0 outline-none transition-all font-sans">
                                 </div>
                                 <button type="submit" class="inline-flex items-center justify-center bg-cyan-500/10 border-2 border-cyan-500 text-cyan-400 font-racing text-xl uppercase py-3 px-8 transition-all hover:bg-cyan-500 hover:text-black rounded-xl group-hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]">
                                     Aportar
-                                </button>
-                            </div>
-                            @error('amount') <span class="text-brand-red text-xs mt-1">{{ $message }}</span> @enderror
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Club Diamante Mensual -->
-                <div class="bg-brand-black border border-purple-500/30 flex flex-col items-start shadow-2xl transition-all duration-300 hover:border-purple-400 hover:-translate-y-2 rounded-2xl overflow-hidden relative group p-8 md:p-10">
-                    <!-- Destello de fondo -->
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-                    
-                    <div class="relative z-10 flex-grow mb-8">
-                        <div class="flex items-center gap-3 mb-2">
-                            <h4 class="text-3xl font-racing uppercase text-purple-400 tracking-wide">Club Diamante</h4>
-                        </div>
-                        <div class="font-racing text-2xl text-white mb-4">Aportación Mensual Libre</div>
-                        <p class="text-gray-400 text-sm font-light leading-relaxed mb-2">
-                            {!! nl2br(e($settings['club_diamante_desc']->value ?? '¿Quieres apoyar de manera constante y a tu medida? Aporta la cantidad que desees mes con mes y sé el motor de este sueño. ¡Cualquier apoyo es clave!')) !!}
-                        </p>
-                    </div>
-                    
-                    <div class="w-full relative z-10">
-                        <form action="{{ route('donate.recurring') }}" method="POST" class="flex flex-col gap-1 sm:gap-3">
-                            @csrf
-                            <div class="flex flex-col sm:flex-row gap-3 w-full">
-                                <div class="relative flex-grow">
-                                    <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-400 font-bold">$</span>
-                                    <input type="number" name="amount" min="100" value="100" placeholder="100" required class="w-full bg-brand-dark border-2 border-purple-500/30 text-white rounded-xl py-3 pl-10 pr-4 focus:border-purple-400 focus:ring-0 outline-none transition-all font-sans">
-                                </div>
-                                <button type="submit" class="inline-flex items-center justify-center bg-purple-500/10 border-2 border-purple-500 text-purple-400 font-racing text-xl uppercase py-3 px-8 transition-all hover:bg-purple-500 hover:text-black rounded-xl group-hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]">
-                                    Suscribir
                                 </button>
                             </div>
                             @error('amount') <span class="text-brand-red text-xs mt-1">{{ $message }}</span> @enderror
