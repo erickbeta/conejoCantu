@@ -930,7 +930,7 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
             <div class="mt-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
                 <!-- Aportación Mensual (antes Club Diamante) -->
-                <div class="bg-brand-black border border-purple-500/30 flex flex-col items-start shadow-2xl transition-all duration-300 hover:border-purple-400 hover:-translate-y-2 rounded-2xl overflow-hidden relative group p-8 md:p-10">
+                <div id="aportacion-mensual" class="scroll-mt-24 bg-brand-black border border-purple-500/30 flex flex-col items-start shadow-2xl transition-all duration-300 hover:border-purple-400 hover:-translate-y-2 rounded-2xl overflow-hidden relative group p-8 md:p-10">
                     <!-- Destello de fondo -->
                     <div class="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
                     
@@ -1549,18 +1549,19 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
 
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // --- Navegación exacta por Hash / Código QR (ej. /#suscripciones) ---
+            // --- Navegación exacta por Hash / Código QR (ej. /#suscripciones o /#aportacion-mensual) ---
             const scrollToHashSection = () => {
                 if (!window.location.hash) return;
                 const targetId = window.location.hash.substring(1);
                 const targetSection = document.getElementById(targetId);
                 if (targetSection) {
                     // Mostrar inmediatamente los elementos dentro de la sección destino
-                    targetSection.querySelectorAll('.opacity-0').forEach(el => {
+                    const container = targetSection.closest('section') || targetSection;
+                    container.querySelectorAll('.opacity-0').forEach(el => {
                         el.classList.remove('opacity-0', 'translate-y-10', 'translate-y-12');
                         el.classList.add('opacity-100', 'translate-y-0');
                     });
-                    const navbarHeight = document.getElementById('navbar')?.offsetHeight || 80;
+                    const navbarHeight = (document.getElementById('navbar')?.offsetHeight || 80) + 12;
                     const topPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
                     window.scrollTo({ top: topPosition, behavior: 'smooth' });
                 }
