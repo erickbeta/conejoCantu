@@ -974,7 +974,6 @@ Tendrás acceso a noticias, beneficios y contenido exclusivo, pero sobre todo, s
                         <p class="text-gray-400 text-sm font-light leading-relaxed mb-2">
                             {!! nl2br(e($settings['club_diamante_desc']->value ?? '¿Quieres apoyar de manera constante y a tu medida? Aporta la cantidad que desees mes con mes y sé el motor de este sueño. ¡Cualquier apoyo es clave!')) !!}
                         </p>
-                        <div class="mb-4 font-bold text-purple-400 text-sm italic">+ Incluye todos los beneficios del Club Élite</div>
                     </div>
                     
                     <div class="w-full relative z-10">
